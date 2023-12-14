@@ -9,8 +9,9 @@ const Hotels = () => {
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
-  const [showDate, setShowDate] = useState<boolean>(false)
-  const [options, setOptions] = useState(location.state.options);
+  const [showDate, setShowDate] = useState<boolean>(false);
+  // const [options, setOptions] = useState(location.state.options);
+  let options = location.state.options;
   return (
     <div>
       <Header />
@@ -23,40 +24,85 @@ const Hotels = () => {
             type="text"
             id="dest"
             placeholder={destination}
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
             className="p-2"
           />
           <p>Check-in date</p>
-          <span onClick={()=> setShowDate(prev => !prev)} className="p-2 bg-white">{`${format(
-            date[0].startDate,
+          <span
+            onClick={() => setShowDate((prev) => !prev)}
+            className="p-2 bg-white"
+          >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+            date[0].endDate,
             "MM/dd/yyyy"
-          )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
-          {showDate && <DateRange
-            onChange={(item) => setDate([item.selection])}
-            minDate={new Date()}
-            ranges={date}
-            editableDateInputs
-          />}
+          )}`}</span>
+          {showDate && (
+            <DateRange
+              onChange={(item) => setDate([item.selection])}
+              minDate={new Date()}
+              ranges={date}
+              editableDateInputs
+            />
+          )}
           <p>Options</p>
           <div className="px-2">
             <div className="flex items-center justify-between mb-3">
-              <label htmlFor="min" className="text-sm text-gray-700">Min price per night</label>
-              <input type="number" id="min" min={1} className="w-16 px-1 py-0.5 focus:outline-none" />
+              <label htmlFor="min" className="text-sm text-gray-700">
+                Min price per night
+              </label>
+              <input
+                type="number"
+                id="min"
+                min={1}
+                className="w-16 px-1 py-0.5 focus:outline-none"
+              />
             </div>
             <div className="flex items-center justify-between mb-3">
-              <label htmlFor="max" className="text-sm text-gray-700">Max price per night</label>
-              <input type="number" id="max" min={1} className="w-16 px-1 py-0.5 focus:outline-none" />
+              <label htmlFor="max" className="text-sm text-gray-700">
+                Max price per night
+              </label>
+              <input
+                type="number"
+                id="max"
+                min={1}
+                className="w-16 px-1 py-0.5 focus:outline-none"
+              />
             </div>
             <div className="flex items-center justify-between mb-3">
-              <label htmlFor="adult" className="text-sm text-gray-700">Adult</label>
-              <input type="number" id="adult" min={1} className="w-16 px-1 py-0.5 focus:outline-none" placeholder={options.adult} />
+              <label htmlFor="adult" className="text-sm text-gray-700">
+                Adult
+              </label>
+              <input
+                type="number"
+                id="adult"
+                min={1}
+                className="w-16 px-1 py-0.5 focus:outline-none"
+                placeholder={options.adult}
+              />
             </div>
             <div className="flex items-center justify-between mb-3">
-              <label htmlFor="child" className="text-sm text-gray-700">Children</label>
-              <input type="number" id="child" min={0} className="w-16 px-1 py-0.5 focus:outline-none" placeholder={options.children} />
+              <label htmlFor="child" className="text-sm text-gray-700">
+                Children
+              </label>
+              <input
+                type="number"
+                id="child"
+                min={0}
+                className="w-16 px-1 py-0.5 focus:outline-none"
+                placeholder={options.children}
+              />
             </div>
             <div className="flex items-center justify-between mb-3">
-              <label htmlFor="room" className="text-sm text-gray-700">Rooms</label>
-              <input type="number" id="room" min={1} className="w-16 px-1 py-0.5 focus:outline-none" placeholder={options.room} />
+              <label htmlFor="room" className="text-sm text-gray-700">
+                Rooms
+              </label>
+              <input
+                type="number"
+                id="room"
+                min={1}
+                className="w-16 px-1 py-0.5 focus:outline-none"
+                placeholder={options.room}
+              />
             </div>
           </div>
           <button className="py-3 bg-blue-800 text-white w-full">Search</button>

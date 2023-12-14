@@ -59,7 +59,7 @@ const Footer = () => {
       </div>
       {/* ------------------------ COPYRIGHT ------------------------ */}
       <div className="px-16 py-4 flex justify-between text-blue-700 font-semibold border-t">
-        <p>Travel.com</p>
+        <p>Travel.in</p>
         <p>&copy; all rights reserved 2022 - {currentDate.getFullYear()}</p>
       </div>
     </div>
